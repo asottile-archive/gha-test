@@ -36,11 +36,11 @@ jobs:
 
         # TODO: REMOVEME
         echo "::set-output name=matrix::{}"
-        echo '::set-output name=step1::{"run": "echo hi"}'
+        echo '::set-output name=step1::"echo hi"'
   main:
     needs: setup
     runs-on: ${{ inputs.os }}
     strategy:
       matrix: ${{ fromJSON(needs.setup.outputs.matrix) }}
-    steps: 
-    - ${{ fromJSON(needs.setup.outputs.step1) }}
+    steps:
+    - run: ${{ fromJSON(needs.setup.outputs.step1) }}
