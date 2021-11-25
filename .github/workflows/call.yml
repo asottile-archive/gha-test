@@ -35,7 +35,7 @@ jobs:
         python3 -m set_outputs
 
         # TODO: REMOVEME
-        echo "::set-output name=matrix::{}"
+        echo "::set-output name=matrix::{"python": ["3.6", "3.7"]}"
         echo '::set-output name=step1::"echo hi"'
   main:
     needs: setup
