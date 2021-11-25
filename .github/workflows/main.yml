@@ -7,6 +7,4 @@ on:
 
 jobs:
   main:
-    runs-on: ubuntu-latest
-    steps:
-    - run: python3 -m pip freeze
+    uses: asottile-archive/gha-test/.github/workflows/call.yml@master

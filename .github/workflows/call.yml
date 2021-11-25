@@ -1,0 +1,9 @@
+on:
+  workflow_call:
+
+jobs:
+  call:
+    runs-on: ubuntu-latest
+    steps:
+    - run: env | sort
+    - run: python3 -m pip freeze
