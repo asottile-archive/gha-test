@@ -8,3 +8,6 @@ on:
 jobs:
   main:
     uses: asottile-archive/gha-test/.github/workflows/call.yml@master
+    with:
+      os: ubuntu-latest
+      toxenvs: py36,py37

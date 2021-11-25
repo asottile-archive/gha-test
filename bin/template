@@ -1,0 +1,25 @@
+#!/usr/bin/env python3
+import textwrap
+import re
+
+EOF = re.compile('(?<=EOF\n).+(?= {6}EOF)', re.DOTALL)
+
+
+def main() -> int:
+    with open('.github/workflows/call.yml') as f:
+        workflow_contents = f.read()
+
+    with open('set_output.py') as f:
+        set_output_contents = f.read()
+
+    indented = textwrap.indent(set_output_contents, ' ' * 6)
+    new_contents = EOF.sub(indented, workflow_contents)
+
+    with open('.github/workflows/call.yml', 'w') as f:
+        f.write(new_contents)
+
+    return 0
+
+
+if __name__ == '__main__':
+    raise SystemExit(main())

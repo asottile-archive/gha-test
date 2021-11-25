@@ -1,9 +1,41 @@
 on:
   workflow_call:
+    inputs:
+      os:
+        type: string
+        required: true
+      toxenvs:
+        type: string
+        required: true
 
 jobs:
-  call:
+  setup:
     runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.setup.outputs.matrix }}
+      steps: ${{ steps.setup.outputs.steps }}
     steps:
-    - run: env | sort
-    - run: jq . $GITHUB_EVENT_PATH
+    - id: setup
+      run: |
+      cat > set_outputs.py << EOF
+      import argparse
+      import os
+
+
+      def main() -> int:
+          for k, v in sorted(os.environ.items()):
+              if 'INPUT' in k:
+                  print(f'{k}: {v}')
+          return 0
+
+
+      if __name__ == '__main__':
+          raise SystemExit(main())
+      EOF
+      python3 -m set_outputs
+  main:
+    needs: setup
+    runs-on: ${{ inputs.os }}
+    strategy:
+      matrix: ${{ fromJSON(needs.setup.outputs.matrix) }}
+    steps: ${{ fromJSON(needs.setup.outputs.steps) }}

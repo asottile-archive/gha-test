@@ -1,0 +1,9 @@
+repos:
+-   repo: local
+    hooks:
+    -   id: template-call
+        name: template call.yml
+        entry: bin/template
+        language: script
+        files: ^(set_output\.py|bin/template|\.github/workflows/call\.yml)$
+        pass_filenames: false
