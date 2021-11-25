@@ -33,6 +33,10 @@ jobs:
             raise SystemExit(main())
         EOF
         python3 -m set_outputs
+
+        # TODO: REMOVEME
+        echo "::set-output name=matrix::{}"
+        echo "::set-output name=steps::[]"
   main:
     needs: setup
     runs-on: ${{ inputs.os }}
