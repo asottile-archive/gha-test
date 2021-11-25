@@ -1,0 +1,12 @@
+name: main
+on:
+  pull_request:
+  push:
+    branches: [master]
+    tags:
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+    - run: python3 -m pip freeze
