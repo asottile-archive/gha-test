@@ -2,7 +2,7 @@
 import textwrap
 import re
 
-EOF = re.compile('(?<=EOF\n).+(?= {6}EOF)', re.DOTALL)
+EOF = re.compile('(?<=EOF\n).+(?= {8}EOF)', re.DOTALL)
 
 
 def main() -> int:
@@ -12,7 +12,7 @@ def main() -> int:
     with open('set_output.py') as f:
         set_output_contents = f.read()
 
-    indented = textwrap.indent(set_output_contents, ' ' * 6)
+    indented = textwrap.indent(set_output_contents, ' ' * 8)
     new_contents = EOF.sub(indented, workflow_contents)
 
     with open('.github/workflows/call.yml', 'w') as f:

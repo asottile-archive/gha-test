@@ -17,22 +17,22 @@ jobs:
     steps:
     - id: setup
       run: |
-      cat > set_outputs.py << EOF
-      import argparse
-      import os
+        cat > set_outputs.py << EOF
+        import argparse
+        import os
 
 
-      def main() -> int:
-          for k, v in sorted(os.environ.items()):
-              if 'INPUT' in k:
-                  print(f'{k}: {v}')
-          return 0
+        def main() -> int:
+            for k, v in sorted(os.environ.items()):
+                if 'INPUT' in k:
+                    print(f'{k}: {v}')
+            return 0
 
 
-      if __name__ == '__main__':
-          raise SystemExit(main())
-      EOF
-      python3 -m set_outputs
+        if __name__ == '__main__':
+            raise SystemExit(main())
+        EOF
+        python3 -m set_outputs
   main:
     needs: setup
     runs-on: ${{ inputs.os }}
